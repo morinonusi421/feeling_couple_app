@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
-  get 'users/new'
-  root "application#hello"
+  get 'static_pages/home'
+  root to:'static_pages#home'
+  resources :users
+  get  "/makeuser",  to: "users#new"
 end
