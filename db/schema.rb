@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_28_075243) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_28_093010) do
   create_table "parties", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -21,7 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_28_075243) do
 
   create_table "users", force: :cascade do |t|
     t.string "name"
-    t.string "sex"
+    t.integer "sex"
     t.boolean "voted"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
