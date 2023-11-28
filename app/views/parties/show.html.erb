@@ -3,9 +3,14 @@
   <aside class="col-md-4">
     <section class="party_info">
       <h1>
+        パーティ名<br>
         <%= @party.name %>
         <br>
-        <%=@party.name.length%>
+        <br>
+        <% if @party.status == "登録中"%>
+          フィーリングカップルのためのメンバーを<br>
+          どんどん追加していきましょう<br>
+        <% end%>
         <br>
       </h1>
     </section>
