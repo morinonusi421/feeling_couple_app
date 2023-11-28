@@ -1,11 +1,15 @@
 <% provide(:title, 'パーティの作成') %>
 <h1>パーティの作成ページ</h1>
 
+新しいパーティの名前を入力してください！<br>
+(50文字を超えるとエラーになります)<br>
+(もうすでに使われている名前は使えません)<br><br>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <%= form_with(model: @party) do |f| %>
-      <%= f.label :name, "パーティの名前" %>
+      <%= render 'shared/error_messages' %>
+      <%= f.label :name ,"パーティの名前"%>
       <%= f.text_field :name %>
       <%= f.submit "パーティを作成する！", class: "btn btn-primary" %>
     <% end %>
