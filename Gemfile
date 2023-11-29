@@ -34,6 +34,8 @@ group :test do
   gem "guard",                    "2.18.0"
   gem "guard-minitest",           "2.4.6"
 end
-
+group :production do
+  gem "pg", "1.3.5"
+end
 # Windows ではタイムゾーン情報用の tzinfo-data gem を含める必要があります
 #gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
