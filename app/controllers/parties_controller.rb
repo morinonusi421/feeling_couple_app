@@ -2,7 +2,8 @@ class PartiesController < ApplicationController
 
   def show
     @party = Party.find(params[:id])
-    @user = @party.users.build
+    @users = @party.users
+    @newuser = @party.users.build
   end
 
   def new

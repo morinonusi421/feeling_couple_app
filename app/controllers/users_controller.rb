@@ -10,10 +10,13 @@ class UsersController < ApplicationController
     @party = Party.find(@party_id)
     @user = @party.users.build(user_params)
     if @user.save
-      flash[:success] = "メンバーの追加に成功しました"
+      flash[:userform] = "メンバーの追加に成功しました"
       redirect_to @party
     else
-      render template: "parties/show", status: :unprocessable_entity
+      @users = @party.users
+      flash[:userform] = "メンバーの追加に失敗しました"
+      #render template: "parties/show", status: :unprocessable_entity
+      redirect_to @party , status: :unprocessable_entity
     end
   end
 
@@ -22,7 +25,7 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:name)
+      params.require(:user).permit(:name,:sex)
     end
 
 

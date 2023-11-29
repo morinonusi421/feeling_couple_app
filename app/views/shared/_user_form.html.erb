@@ -1,7 +1,22 @@
-<%= form_with(model: @user) do |f| %>
+
+
+<%= form_with(model: @newuser) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
     <%= f.text_area :name, placeholder: "新人の名前" %>
   </div>
+  <%= f.label :sales_status_draft, '男の子' %>
+  <%= f.radio_button :sex, :男の子 %>
+  <br>
+  <%= f.label :sales_status_on_sale, '女の子' %>
+  <%= f.radio_button :sex, :女の子 %>
+  <br>
   <%= f.submit "Post", class: "btn btn-primary" %>
+  <br>
+<% end %>
+
+<% flash.each do |message_type, message| %>
+  <% if message_type == "userform" %>
+    <div class="alert alert-<%= message_type %>"><%= message %></div>
+  <% end%>
 <% end %>
