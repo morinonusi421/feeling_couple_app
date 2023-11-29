@@ -4,7 +4,19 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def new
-    @user = User.new
+  def create
+    @party = Party.first
+    @user = @party.users.build(user_params)
+    @user.save
   end
+
+  
+
+  private
+
+    def user_params
+      params.require(:user).permit(:name)
+    end
+
+
 end

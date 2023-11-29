@@ -10,6 +10,9 @@
         <% if @party.status == "登録中"%>
           フィーリングカップルのためのメンバーを<br>
           どんどん追加していきましょう<br>
+          <section class="user_form">
+            <%= render 'shared/user_form' %>
+          </section>
         <% end%>
         <br>
       </h1>
