@@ -4,19 +4,16 @@
     <section class="party_info">
       <h1>
         パーティ名<br>
-        <%= @party.name %>
+        <%= @party.name %><br>
         <br>
-        <br>
-        現在のメンバー数<%= @users.count %><br>
-        <br>
-        男の子<br>
+        男の子<%= @users.count{|u|u.sex=="boy"}%>人<br>
         <%@users.each do |user|%>
           <%if user.sex=="boy"%>
             <%=user.name%><br>
           <%end%>
         <%end%>
         <br>
-        女の子<br>
+        女の子<%= @users.count{|u|u.sex=="girl"}%>人<br>
         <%@users.each do |user|%>
           <%if user.sex=="girl"%>
             <%=user.name%><br>
@@ -32,6 +29,10 @@
             <%= render 'shared/user_form' %>
           </section>
         <% end%>
+
+    <br><br>
+    パーティを削除する場合はこちら
+    <%= button_to "削除", @tparty, method: :delete %>
     </section>
   </aside>
 </div>

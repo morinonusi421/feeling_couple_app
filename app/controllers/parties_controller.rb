@@ -34,6 +34,13 @@ class PartiesController < ApplicationController
     end
   end
 
+  def destroy
+    @party = Party.find(params[:id])
+    @party.destroy
+    flash[:success] = "パーティを削除しました"
+    redirect_to root_url, status: :see_other
+  end
+
   private
 
     def party_params
