@@ -3,11 +3,11 @@
   <div class="field">
     <%= f.text_area :name, placeholder: "新人の名前" %>
   </div>
-  <%= f.label :sales_status_draft, '男の子' %>
-  <%= f.radio_button :sex, :男の子 %>
+  <%= f.label :boy, '男の子' %>
+  <%= f.radio_button :sex, :boy %>
   <br>
-  <%= f.label :sales_status_on_sale, '女の子' %>
-  <%= f.radio_button :sex, :女の子 %>
+  <%= f.label :girl, '女の子' %>
+  <%= f.radio_button :sex, :girl %>
   <br>
   <%= f.submit "Post", class: "btn btn-primary" %>
   <br>

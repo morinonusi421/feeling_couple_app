@@ -15,7 +15,6 @@ class UsersController < ApplicationController
     else
       @users = @party.users
       flash[:userform] = "メンバーの追加に失敗しました"
-      #render template: "parties/show", status: :unprocessable_entity
       redirect_to @party , status: :unprocessable_entity
     end
   end

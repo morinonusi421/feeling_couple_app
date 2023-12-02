@@ -7,15 +7,25 @@
         <%= @party.name %>
         <br>
         <br>
-        <br>
         現在のメンバー数<%= @users.count %><br>
+        <br>
+        男の子<br>
         <%@users.each do |user|%>
-          <%=user.name%> <%= user.sex%><br>
+          <%if user.sex=="boy"%>
+            <%=user.name%><br>
+          <%end%>
+        <%end%>
+        <br>
+        女の子<br>
+        <%@users.each do |user|%>
+          <%if user.sex=="girl"%>
+            <%=user.name%><br>
+          <%end%>
         <%end%>
         
       </h1>
 
-      <% if @party.status == "登録中"%>
+      <% if @party.status == "recruiting"%>
           フィーリングカップルのためのメンバーを<br>
           どんどん追加していきましょう!<br>
           <section class="user_form">
