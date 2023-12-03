@@ -14,6 +14,7 @@ class PartiesController < ApplicationController
     @party = Party.new(party_params)
     if @party.save
       flash[:success] = "パーティの作成に成功しました"
+      flash[:success] = party_params.inspect
       redirect_to @party
     else
       render 'new', status: :unprocessable_entity
@@ -40,6 +41,17 @@ class PartiesController < ApplicationController
     flash[:success] = "パーティを削除しました"
     redirect_to root_url, status: :see_other
   end
+
+  def update
+    @party = Party.find(params[:id])
+    @party.status = params[:status]
+    @party.save
+    if params[:status]=="choosing"
+      flash[:success] = "メンバーの追加を締め切りました"
+    end
+    redirect_to @party
+  end
+
 
   private
 

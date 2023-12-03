@@ -28,11 +28,12 @@
           <section class="user_form">
             <%= render 'shared/user_form' %>
           </section>
+        <%= button_to 'Update', party_path(@party), {method: :put, params: { status: 'choosing' }}%>
         <% end%>
 
     <br><br>
     パーティを削除する場合はこちら
-    <%= button_to "削除", @tparty, method: :delete %>
+    <%= button_to "削除", @party, method: :delete %>
     </section>
   </aside>
 </div>
