@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   resources :parties
   get "/newparty", to: "parties#new"
   get "/searchparty", to: "parties#search"
+  get "/reload", to: 'application#reload'
 end

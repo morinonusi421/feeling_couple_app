@@ -44,6 +44,7 @@ class PartiesController < ApplicationController
   def update
     @party = Party.find(params[:id])
     @users = @party.users
+
     if params[:status]=="choosing"
       if @users.count{|u|u.sex=="boy"}>=1 && @users.count{|u|u.sex=="girl"}>=1
         @party.status = params[:status]
@@ -55,6 +56,12 @@ class PartiesController < ApplicationController
         redirect_to @party, status: :unprocessable_entity
       end
     end
+
+    if params[:status]=="resulting"
+      
+    end
+    
+
   end
 
 

@@ -14,7 +14,7 @@
       <% if @party.status == "recruiting"%>
         フィーリングカップルのためのメンバーを<br>
         どんどん追加していきましょう!<br>
-        <h1>
+        <h3>
         男の子<%= boys.count %>人<br>
         <%boys.each do |boy|%>
           <%=boy.name%><br>
@@ -25,7 +25,7 @@
           <%=girl.name%><br>
         <%end%>
         <br>
-        </h1>
+        </h3>
         <section class="user_form">
           <%= render 'shared/user_form' %>
         </section>
@@ -34,27 +34,36 @@
         <%= button_to '締切', party_path(@party), {method: :put, params: { status: 'choosing' }}%>
       <% end%>
 
+
+
+
+
       <% if @party.status == "choosing"%>
         ドキドキ投票タイムです!<br>
-        ①自分の名前をクリック<br>
-         (他人の投票を勝手にしないように！)<br>
+        ①自分の名前をクリック (他人の名前は勝手にクリックしないこと！)<br>
         ②好きな人をこっそり投票<br>
         ③全員の投票が終わったら，終了ボタンをクリック<br>
-        <h1>
+        <h3>
         男の子<%= boys.count %>人<br>
         <% boys.each do |boy| %>
           <%= link_to boy.name , boy %><br>
         <%end%>
+        <br>
         女の子<%= girls.count %>人<br>
         <% girls.each do |girl| %>
           <%= link_to girl.name , girl %><br>
         <%end%>
-        </h1>
+        </h3>
+        <br><br><br>
+        全員の投票が終わったらこちら
+        <%= button_to '投票終了', party_path(@party), {method: :put, params: { status: 'resulting' }}%>
       <% end %>
+
+
 
     <br><br>
     パーティを削除する場合はこちら
-    <%= button_to "削除", @party, method: :delete %>
+    <%= button_to "削除", @party, method: :delete , data: { turbo_confirm: "本当に削除しますか？" } %>
     </section>
   </aside>
 </div>
