@@ -3,22 +3,33 @@
    opposit_sex_users = party.users.select{|u| u.sex != @user.sex}
 %>
 
-<h1>
-  <%= @user.name %>さんの好きな人を選ぶページです！<br>
-  間違えて来た人は<%=link_to "ここをクリック", party %>して戻りましょう<br>
-</h1>
+<%if party.status != "choosing"%>
+  ここは本来，<%=@user.name%>さんの好きな人を投票するためのページです。<br>
+  今はこのユーザーの投票受付中ではないので、<br>
+  上のボタンからトップページにお戻りください。<br>
 
-あなたの好きな人を選んでね
-<%= form_with(model: @user) do |f| %>
-  <%opposit_sex_users.each do |u|%>
-    <%= f.label :loving, u.name %>
-    <%= f.radio_button :loving_id, u.id%>
+<%elsif @user.loving.nil?%>
+  <h1>
+    <%= @user.name %>さんの好きな人を選ぶページです！<br>
+    間違えて来た人は<%=link_to "ここをクリック", party %>して戻りましょう<br>
+  </h1>
+
+  あなたの好きな人を選んでね
+  <%= form_with(model: @user) do |f| %>
+    <%opposit_sex_users.each do |u|%>
+      <%= f.label :loving, u.name %>
+      <%= f.radio_button :loving_id, u.id%>
+      <br>
+    <%end%>
     <br>
+    <%= f.submit "好きな人を決定！", class: "btn btn-primary" %>
   <%end%>
-  <br>
-  <%= f.submit "好きな人を決定！", class: "btn btn-primary" %>
-<%end%>
 
+<%else%>
+  このユーザーはすでに投票済みです．
+  誰に投票したかは・・内緒です！<br>
+  <%=link_to "パーティページへ戻る", party %>
+<%end%>
 
 <br><br>
 

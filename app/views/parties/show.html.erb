@@ -42,17 +42,25 @@
   <h3>
   男の子：<%= boys.count %>人<br>
   <% boys.each do |boy| %>
-    <%= link_to boy.name , boy %><br>
+    <%if boy.loving.nil?%>
+      <%= link_to boy.name , boy %><br>
+    <%else%>
+      <%= boy.name%>(投票済み)<br>
+    <%end%>
   <%end%>
   <br>
   女の子：<%= girls.count %>人<br>
   <% girls.each do |girl| %>
-    <%= link_to girl.name , girl %><br>
+    <%if girl.loving.nil?%>
+      <%= link_to girl.name , girl %><br>
+    <%else%>
+      <%= girl.name%>(投票済み)<br>
+    <%end%>
   <%end%>
   </h3>
   <br><br><br>
   全員の投票が終わったらこちら
-  <%= button_to '投票終了', party_path(@party), {method: :put, params: { status: 'resulting' }}%>
+  <%= button_to '結果発表', party_path(@party), {method: :put, params: { status: 'resulting' },data: { turbo_confirm: "心の準備はいいですか?" }}%>
 <% end %>
 
 
