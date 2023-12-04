@@ -19,12 +19,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      flash[:success] = @user.name + "さんの投票が完了しました"
+      redirect_to @user.party
+    else
+      flash[:debug] = "不明なエラー．作成者にお知らせください"
+      redirect_to @user
+    end
+  end
   
 
   private
 
     def user_params
-      params.require(:user).permit(:name,:sex)
+      params.require(:user).permit(:name,:sex,:loving_id)
     end
 
 

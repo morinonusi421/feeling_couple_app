@@ -55,9 +55,8 @@ class PartiesController < ApplicationController
         flash[:failed] = "メンバーの追加締め切りに失敗しました。男女それぞれ最低1名の追加が必要です"
         redirect_to @party, status: :unprocessable_entity
       end
-    end
 
-    if params[:status]=="resulting"
+    elsif params[:status]=="resulting"
       
     end
     
@@ -68,7 +67,7 @@ class PartiesController < ApplicationController
   private
 
     def party_params
-      params.require(:party).permit(:name)
+      params.require(:party).permit(:name,:status)
     end
 
     def search_params

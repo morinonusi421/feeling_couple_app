@@ -1,11 +1,24 @@
 <% provide(:title, @user.name) %>
-<div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <h1>
-        名前<br>
-        <%= @user.name %><br>
-      </h1>
-    </section>
-  </aside>
-</div>
+<% party = @user.party 
+   opposit_sex_users = party.users.select{|u| u.sex != @user.sex}
+%>
+
+<h1>
+  <%= @user.name %>さんの好きな人を選ぶページです！<br>
+  間違えて来た人は<%=link_to "ここをクリック", party %>して戻りましょう<br>
+</h1>
+
+あなたの好きな人を選んでね
+<%= form_with(model: @user) do |f| %>
+  <%opposit_sex_users.each do |u|%>
+    <%= f.label :loving, u.name %>
+    <%= f.radio_button :loving_id, u.id%>
+    <br>
+  <%end%>
+  <br>
+  <%= f.submit "好きな人を決定！", class: "btn btn-primary" %>
+<%end%>
+
+
+<br><br>
+
