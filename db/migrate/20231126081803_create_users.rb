@@ -4,6 +4,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :name
       t.integer :sex
       t.boolean :choosed
+      t.references :loving, foreign_key: { to_table: :users }
 
       t.timestamps
     end

@@ -15,7 +15,9 @@
     <div class="container">
       <% flash.each do |message_type, message| %>
       <% if message_type != "userform" %>
+        <font color="red">
         <div class="alert alert-<%= message_type %>"><%= message %></div>
+        </font>
       <% end%>
       <% end %>
       <%= yield %>

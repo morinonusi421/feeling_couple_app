@@ -2,8 +2,8 @@ class PartiesController < ApplicationController
 
   def show
     @party = Party.find(params[:id])
-    @users = @party.users
-    @newuser = @party.users.build
+    #@users = @party.users
+    #@newuser = @party.users.build
   end
 
   def new
@@ -14,7 +14,6 @@ class PartiesController < ApplicationController
     @party = Party.new(party_params)
     if @party.save
       flash[:success] = "パーティの作成に成功しました"
-      flash[:success] = party_params.inspect
       redirect_to @party
     else
       render 'new', status: :unprocessable_entity
@@ -44,12 +43,18 @@ class PartiesController < ApplicationController
 
   def update
     @party = Party.find(params[:id])
-    @party.status = params[:status]
-    @party.save
+    @users = @party.users
     if params[:status]=="choosing"
-      flash[:success] = "メンバーの追加を締め切りました"
+      if @users.count{|u|u.sex=="boy"}>=1 && @users.count{|u|u.sex=="girl"}>=1
+        @party.status = params[:status]
+        @party.save
+        flash[:success] = "メンバーの追加を締め切りました"
+        redirect_to @party
+      else
+        flash[:failed] = "メンバーの追加締め切りに失敗しました。男女それぞれ最低1名の追加が必要です"
+        redirect_to @party, status: :unprocessable_entity
+      end
     end
-    redirect_to @party
   end
 
 

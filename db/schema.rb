@@ -23,9 +23,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_28_075243) do
     t.string "name"
     t.integer "sex"
     t.boolean "choosed"
+    t.integer "loving_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "party_id"
+    t.index ["loving_id"], name: "index_users_on_loving_id"
   end
 
+  add_foreign_key "users", "users", column: "loving_id"
 end

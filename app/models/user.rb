@@ -4,11 +4,7 @@ class User < ApplicationRecord
   validates :name,  presence: true, length: { maximum: 10 }, uniqueness: { scope: :party_id }
   validates :sex, presence: true
 
-  #def self.search(keyword)
-  #  if keyword.present?
-  #   where('name LIKE ?', "#{keyword}%")
-  #  else
-  #    all
-  #  end
-  #end
+  has_many :loved, class_name: "User", foreign_key: "loving_id"
+
+  belongs_to :loving, class_name: "User", optional: true, inverse_of: :loved
 end

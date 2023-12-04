@@ -1,35 +1,56 @@
+<%users = @party.users%>
+<%boys = users.select{|u|u.sex=="boy"}%>
+<%girls = users.select{|u|u.sex=="girl"}%>
 <% provide(:title, @party.name) %>
 <div class="row">
   <aside class="col-md-4">
     <section class="party_info">
-      <h1>
+      <h2>
         パーティ名<br>
         <%= @party.name %><br>
         <br>
-        男の子<%= @users.count{|u|u.sex=="boy"}%>人<br>
-        <%@users.each do |user|%>
-          <%if user.sex=="boy"%>
-            <%=user.name%><br>
-          <%end%>
-        <%end%>
-        <br>
-        女の子<%= @users.count{|u|u.sex=="girl"}%>人<br>
-        <%@users.each do |user|%>
-          <%if user.sex=="girl"%>
-            <%=user.name%><br>
-          <%end%>
-        <%end%>
-        
-      </h1>
+      </h2>
 
       <% if @party.status == "recruiting"%>
-          フィーリングカップルのためのメンバーを<br>
-          どんどん追加していきましょう!<br>
-          <section class="user_form">
-            <%= render 'shared/user_form' %>
-          </section>
-        <%= button_to 'Update', party_path(@party), {method: :put, params: { status: 'choosing' }}%>
-        <% end%>
+        フィーリングカップルのためのメンバーを<br>
+        どんどん追加していきましょう!<br>
+        <h1>
+        男の子<%= boys.count %>人<br>
+        <%boys.each do |boy|%>
+          <%=boy.name%><br>
+        <%end%>
+        <br>
+        女の子<%= girls.count%>人<br>
+        <%girls.each do |girl|%>
+          <%=girl.name%><br>
+        <%end%>
+        <br>
+        </h1>
+        <section class="user_form">
+          <%= render 'shared/user_form' %>
+        </section>
+        <br><br><br>
+        メンバーの追加を締め切る場合はこちら
+        <%= button_to '締切', party_path(@party), {method: :put, params: { status: 'choosing' }}%>
+      <% end%>
+
+      <% if @party.status == "choosing"%>
+        ドキドキ投票タイムです!<br>
+        ①自分の名前をクリック<br>
+         (他人の投票を勝手にしないように！)<br>
+        ②好きな人をこっそり投票<br>
+        ③全員の投票が終わったら，終了ボタンをクリック<br>
+        <h1>
+        男の子<%= boys.count %>人<br>
+        <% boys.each do |boy| %>
+          <%= link_to boy.name , boy %><br>
+        <%end%>
+        女の子<%= girls.count %>人<br>
+        <% girls.each do |girl| %>
+          <%= link_to girl.name , girl %><br>
+        <%end%>
+        </h1>
+      <% end %>
 
     <br><br>
     パーティを削除する場合はこちら
