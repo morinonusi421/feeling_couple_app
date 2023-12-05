@@ -21,14 +21,14 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.has_choosed = true
-    if @user.update(user_params)
-      flash[:success] = @user.name + "さんの投票が完了しました"
-      redirect_to @user.party
-    else
-      flash[:debug] = "不明なエラー．作成者にお知らせください"
-      redirect_to @user 
+    #-1は誰も好きじゃないことを表すダミーデータ
+    if user_params[:loving_id] != "-1"
+      @user.update(user_params)
     end
+    @user.has_choosed = true
+    @user.save
+    flash[:success] = @user.name + "さんの投票が完了しました"
+    redirect_to @user.party
   end
   
 

@@ -21,9 +21,9 @@
       <%= f.radio_button :loving_id, u.id%>
       <br>
     <%end%>
-    <%= f.hidden_field :loving_id, value: nil %>
+    
     <%=f.label :loving, "誰も好きじゃない"%>
-    <%=f.radio_button :loving_id, '' %>
+    <%=f.radio_button :loving_id,  -1%>
     <br><br>
     <%= f.submit "好きな人を決定！", class: "btn btn-primary" %>
   <%end%>
