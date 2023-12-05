@@ -11,16 +11,14 @@ class Party < ApplicationRecord
     self.users.select{|u|u.sex=="girl"}
   end
 
-  def lovers
-    lovers = []
-    self.boys.each do |boy|
-      if !boy.loving.nil?
-        if boy.loving.loving == boy
-          lovers.append([boy,boy.loving])
-        end
-      end
+def lovers
+  lovers = []
+  self.boys.each do |boy|
+    if boy.loved.include?(boy.loving)
+      lovers.append([boy,boy.loving])
     end
-    lovers
   end
+  lovers
+end
 
 end

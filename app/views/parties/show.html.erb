@@ -72,18 +72,26 @@
   <br><br><br><br><br><br><br><br><br><br><br><br>
   </h3>
 
-  <h1>
   <% if lovers.count >= 1%>
+    <h1>
     <%=lovers.count%>組のカップルが誕生しました！！!!!!!<br>
     <% lovers.each do |boy,girl|%>
       <%=boy.name%> & <%=girl.name%>カップル<br>
     <%end%>
+    おめでとうございま〜〜〜す！！！<br>
+    <iframe width="640" height="360" src="https://www.youtube.com/embed/lVIHyj9qVy0" title="ヤバイTシャツ屋さん - 「ハッピーウェディング前ソング」Music Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </h1>
 
   <%else%>
-    カップルは誕生しませんでした・・・・・
+    <h1>
+    カップルは誕生しませんでした・・・・・<br>
+    </h1>
+    <br>
+    いつかまた素敵な出会いがあることを願っています<br>
   <%end%>
   <br>
-  </h1>
+  
+
 
 
 <% end %>
