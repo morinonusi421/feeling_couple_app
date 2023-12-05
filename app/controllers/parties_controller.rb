@@ -57,6 +57,14 @@ class PartiesController < ApplicationController
       end
 
     elsif params[:status]=="resulting"
+      if @users.count{|u|u.has_choosed} == @users.count
+        @party.status = params[:status]
+        @party.save
+        redirect_to @party
+      else
+        flash[:failed] = "まだ全員の投票が終わっていません"
+        redirect_to @party, status: :unprocessable_entity
+      end
       
     end
     

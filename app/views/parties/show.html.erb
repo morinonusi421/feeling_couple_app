@@ -1,6 +1,7 @@
 <%users = @party.users%>
-<%boys = users.select{|u|u.sex=="boy"}%>
-<%girls = users.select{|u|u.sex=="girl"}%>
+<%boys = @party.boys%>
+<%girls = @party.girls%>
+<%lovers = @party.lovers%>
 <% provide(:title, @party.name) %>
 <h1>
   パーティ名<br>
@@ -28,13 +29,12 @@
   <br><br><br>
   メンバーの追加を締め切る場合はこちら
   <%= button_to '締切', party_path(@party), {method: :put, params: { status: 'choosing' }}%>
-<% end%>
 
 
 
 
 
-<% if @party.status == "choosing"%>
+<% elsif @party.status == "choosing"%>
   ドキドキ投票タイムです!<br><br>
   ①自分の名前をクリック (他人の名前は勝手にクリックしないこと！)<br>
   ②好きな人をこっそり投票<br>
@@ -42,25 +42,50 @@
   <h3>
   男の子：<%= boys.count %>人<br>
   <% boys.each do |boy| %>
-    <%if boy.loving.nil?%>
-      <%= link_to boy.name , boy %><br>
-    <%else%>
+    <%if boy.has_choosed?%>
       <%= boy.name%>(投票済み)<br>
+    <%else%>
+       <%= link_to boy.name , boy %><br>
     <%end%>
   <%end%>
   <br>
   女の子：<%= girls.count %>人<br>
   <% girls.each do |girl| %>
-    <%if girl.loving.nil?%>
-      <%= link_to girl.name , girl %><br>
-    <%else%>
+    <%if girl.has_choosed?%>
       <%= girl.name%>(投票済み)<br>
+    <%else%>
+      <%= link_to girl.name , girl %><br>
     <%end%>
   <%end%>
   </h3>
   <br><br><br>
   全員の投票が終わったらこちら
   <%= button_to '結果発表', party_path(@party), {method: :put, params: { status: 'resulting' },data: { turbo_confirm: "心の準備はいいですか?" }}%>
+
+
+
+
+
+<% elsif @party.status == "resulting"%>
+  <h3>
+  なんと今回・・・・
+  <br><br><br><br><br><br><br><br><br><br><br><br>
+  </h3>
+
+  <h1>
+  <% if lovers.count >= 1%>
+    <%=lovers.count%>組のカップルが誕生しました！！!!!!!<br>
+    <% lovers.each do |boy,girl|%>
+      <%=boy.name%> & <%=girl.name%>カップル<br>
+    <%end%>
+
+  <%else%>
+    カップルは誕生しませんでした・・・・・
+  <%end%>
+  <br>
+  </h1>
+
+
 <% end %>
 
 

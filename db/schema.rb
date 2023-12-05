@@ -22,7 +22,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_28_075243) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.integer "sex"
-    t.boolean "choosed"
+    t.boolean "has_choosed", default: false
     t.integer "loving_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
