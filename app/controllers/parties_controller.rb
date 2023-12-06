@@ -10,6 +10,10 @@ class PartiesController < ApplicationController
     @party = Party.new
   end
 
+  def index
+    @parties = Party.all
+  end
+
   def create
     @party = Party.new(party_params)
     if @party.save
@@ -39,6 +43,13 @@ class PartiesController < ApplicationController
     @party.destroy
     flash[:success] = "パーティを削除しました"
     redirect_to root_url, status: :see_other
+  end
+
+  def destroy_in_index
+    @party = Party.find(params[:id])
+    @party.destroy
+    flash[:success] = "パーティを削除しました"
+    redirect_to parties_path, status: :see_other
   end
 
   def update

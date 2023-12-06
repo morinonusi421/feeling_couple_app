@@ -9,16 +9,14 @@
   パーティ名
   <%= @party.name %><br>
 </h1>
-
-
-
+(このページのURLをシェアするとお友達と一緒に遊べます)<br><br>
 
 
 <% if @party.status == "recruiting"%>
-  フィーリングカップルのためのメンバーを<br>
-  どんどん追加していきましょう!<br>
+  <h2>フィーリングカップルのためのメンバーを<br>
+  どんどん登録していきましょう!</h2>
   <h3>
-  男の子：<%= boys.count %>人<br>
+  男の子：<%= boys.count%>人<br>
   <%boys.each do |boy|%>
     <div class="user-container">
       <%= boy.name%>
@@ -35,12 +33,12 @@
   <%end%>
   </h3>
   <br><br><br>
-  【メンバーの追加はこちら】
+  【メンバーの登録はこちら】
   <section class="user_form">
     <%= render 'shared/user_form' %>
   </section>
   <br><br><br>
-  【メンバーを締め切る場合はこちら］
+  【登録を締め切る場合はこちら］
   <%= button_to '締切', party_path(@party), {method: :put, params: { status: 'choosing' }}%>
 
 
@@ -49,7 +47,7 @@
 
 
 <% elsif @party.status == "choosing"%>
-  ドキドキ投票タイムです!<br><br>
+  <h2>ドキドキ投票タイムです!</h2>
   ①自分の名前をクリック (他人の名前は勝手にクリックしないこと！)<br>
   ②好きな人をこっそり投票<br>
   ③全員の投票が終わったら，終了ボタンをクリック<br>
@@ -114,13 +112,13 @@
     <br>
     次こそリベンジを狙いましょう！<br>
   <%end%>
-  <%= link_to "トップページ" ,  root_url%><br>
+  <%= link_to "トップページに戻る" ,  root_url%><br>
 <% end %>
 
 
 
 <br><br><br>
-【パーティを削除する場合はこちら】ß
+【パーティを削除する場合はこちら】
 <%= button_to "削除", @party, method: :delete , data: { turbo_confirm: "本当に削除しますか？" } %>
 
 <style>
