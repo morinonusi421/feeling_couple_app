@@ -11,14 +11,19 @@ class Party < ApplicationRecord
     self.users.select{|u|u.sex=="girl"}
   end
 
-def lovers
-  lovers = []
-  self.boys.each do |boy|
-    if boy.loved.include?(boy.loving)
-      lovers.append([boy,boy.loving])
+  def lovers
+    lovers = []
+    self.boys.each do |boy|
+      if boy.loved.include?(boy.loving)
+        lovers.append([boy,boy.loving])
+      end
     end
+    lovers
   end
-  lovers
-end
 
+  def not_lovers
+    all_lovers = self.lovers.flatten
+    not_lovers = self.users.select{|u| !all_lovers.include?(u)}
+    not_lovers
+  end
 end

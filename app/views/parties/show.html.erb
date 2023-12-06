@@ -2,11 +2,17 @@
 <%boys = @party.boys%>
 <%girls = @party.girls%>
 <%lovers = @party.lovers%>
+<%not_lovers = @party.not_lovers%>
+
 <% provide(:title, @party.name) %>
 <h1>
-  パーティ名<br>
+  パーティ名
   <%= @party.name %><br>
 </h1>
+
+
+
+
 
 <% if @party.status == "recruiting"%>
   フィーリングカップルのためのメンバーを<br>
@@ -14,7 +20,10 @@
   <h3>
   男の子：<%= boys.count %>人<br>
   <%boys.each do |boy|%>
-    <%=boy.name%><br>
+    <div class="user-container">
+      <%= boy.name%>
+      <%= button_to "削除", boy, method: :delete%>
+    </div>
   <%end%>
   <br>
   女の子：<%= girls.count%>人<br>
@@ -29,6 +38,7 @@
   <br><br><br>
   メンバーの追加を締め切る場合はこちら
   <%= button_to '締切', party_path(@party), {method: :put, params: { status: 'choosing' }}%>
+
 
 
 
@@ -66,6 +76,8 @@
 
 
 
+
+
 <% elsif @party.status == "resulting"%>
   <h3>
   なんと今回・・・・
@@ -89,17 +101,28 @@
     <br>
     いつかまた素敵な出会いがあることを願っています<br>
   <%end%>
-  
-  <br>
-  
 
-
-
+  <% if not_lovers.count >=1 %>
+    【残念ながら結ばれなかった方達】<br>
+    <%not_lovers.each do |user|%>
+      <%= user.name%><br>
+    <%end%>
+    <br>
+    次こそリベンジを狙いましょう！<br>
+  <%end%>
+  <%= link_to "トップページ" ,  root_url%><br>
 <% end %>
 
 
 
-<br><br>
+<br><br><br>
 パーティを削除する場合はこちら
 <%= button_to "削除", @party, method: :delete , data: { turbo_confirm: "本当に削除しますか？" } %>
 
+<style>
+.user-container {
+  display: flex;
+  align-items: center; /* 垂直方向の中央揃え */
+  gap: 20px
+}
+</style>

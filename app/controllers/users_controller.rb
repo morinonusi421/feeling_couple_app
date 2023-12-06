@@ -30,6 +30,14 @@ class UsersController < ApplicationController
     flash[:success] = @user.name + "さんの投票が完了しました"
     redirect_to @user.party
   end
+
+  def destroy
+    @user = User.find(params[:id])
+    @party = @user.party
+    @user.destroy
+    flash[:success] = "メンバーを削除しました"
+    redirect_to @party, status: :see_other
+  end
   
 
   private
