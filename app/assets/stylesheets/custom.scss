@@ -1,0 +1,51 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* universal */
+
+header.navbar.navbar-fixed-top.navbar-inverse {
+  background-color: #ed7fd739; /* お好みの色に変更 */
+  color: #091903; 
+  padding: 4px; /* 必要に応じて余白を追加 */
+  font-size: 13px;
+}
+
+.btn-custom {
+  /* カスタムスタイルを追加 */
+  background-color: #ffffff;
+  color: #000000
+  /* 他のスタイルを追加 */
+}
+
+
+body {
+  background-image: image-url('heart.jpg');
+  padding-top: 60px;
+  font-size: 20px;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+bignews{
+  font-size: 40px;
+  color: #d60000;
+  text-shadow: 4px 4px 4px #666666;
+}
+
+.center {
+  text-align: center;
+}
+
+.center h1 {
+  margin-bottom: 10px;
+}
+
+.background {
+  background-image: image-url('heart.jpg');
+}

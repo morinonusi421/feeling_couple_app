@@ -10,11 +10,11 @@ class UsersController < ApplicationController
     @party = Party.find(@party_id)
     @user = @party.users.build(user_params)
     if @user.save
-      flash[:success] = "メンバーの追加に成功しました"
+      flash[:success] = "メンバーの登録に成功しました"
       redirect_to @party
     else
       @users = @party.users
-      flash[:failed] = "メンバーの追加に失敗しました"
+      flash[:failed] = "メンバーの登録に失敗しました"
       redirect_to @party , status: :unprocessable_entity
     end
   end

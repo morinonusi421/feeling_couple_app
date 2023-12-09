@@ -60,10 +60,10 @@ class PartiesController < ApplicationController
       if @users.count{|u|u.sex=="boy"}>=1 && @users.count{|u|u.sex=="girl"}>=1
         @party.status = params[:status]
         @party.save
-        flash[:success] = "メンバーの追加を締め切りました"
+        flash[:success] = "メンバーの登録を締め切りました"
         redirect_to @party
       else
-        flash[:failed] = "メンバーの追加締め切りに失敗しました。男女それぞれ最低1名の追加が必要です"
+        flash[:failed] = "メンバーの締め切りに失敗しました。男女それぞれ最低1名の追加が必要です"
         redirect_to @party, status: :unprocessable_entity
       end
 
