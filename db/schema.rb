@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_28_075243) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_12_081039) do
+  create_table "likes", force: :cascade do |t|
+    t.integer "liker_id"
+    t.integer "liked_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["liked_id"], name: "index_likes_on_liked_id"
+    t.index ["liker_id", "liked_id"], name: "index_likes_on_liker_id_and_liked_id", unique: true
+    t.index ["liker_id"], name: "index_likes_on_liker_id"
+  end
+
   create_table "parties", force: :cascade do |t|
     t.string "name"
+    t.boolean "allow_like"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0, null: false

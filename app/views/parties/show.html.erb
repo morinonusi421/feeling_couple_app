@@ -122,6 +122,14 @@
 【パーティを削除する場合はこちら】
 <%= button_to "削除", @party, method: :delete , data: { turbo_confirm: "本当に削除しますか？" },class: "btn btn-danger" %>
 
+<%if Rails.env.development? %>
+  <br>
+  ここから開発中のみ見えるデバッグ表示のはず<br>
+  <%= @party.inspect %>
+<%end%>
+
+
+
 <style>
 .user-container {
   display: flex;

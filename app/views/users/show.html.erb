@@ -34,5 +34,17 @@
   <%=link_to "パーティページへ戻る", party %>
 <%end%>
 
+<%if Rails.env.development? %>
+  ここから開発中のみ見えるデバッグ表示のはず<br>
+  <br>
+  本命<br>
+  <%= @user.loving.inspect%><br>
+  好きな人<br>
+  <%= @user.liking.inspect%><br>
+  好かれてる人<br>
+  <%= @user.likers.inspect%><br>
+<%end%>
+
+
 <br><br>
 

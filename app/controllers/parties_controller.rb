@@ -2,8 +2,6 @@ class PartiesController < ApplicationController
 
   def show
     @party = Party.find(params[:id])
-    #@users = @party.users
-    #@newuser = @party.users.build
   end
 
   def new
@@ -86,7 +84,7 @@ class PartiesController < ApplicationController
   private
 
     def party_params
-      params.require(:party).permit(:name,:status)
+      params.require(:party).permit(:name,:status,:allow_like)
     end
 
     def search_params
