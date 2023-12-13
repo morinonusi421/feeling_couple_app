@@ -72,7 +72,7 @@ RuboCop によるコード整形、Ruby 公式デバッガーなどの拡張機�
   <summary><strong>ブラウザ別のエラー解決方法を見る（2023年3月時点）</strong></summary>
   <h3>Google Chrome - Webビューの読み込みエラー</h3>
   <img src='https://i.gyazo.com/c59a5e4c331e5a513860bc118526378d.png)' alt='Chrome のエラー例１' />
-  <p><code>Error: Could not register service workers: NotSupportedError ...</code> などが表示され、「シンプルブラウザーは開いたけど何も表示されない」という場合があります。これは必要な Cookie が許可されていない場合に起こります。以下の例を参考に、サードパーティの Cookie を許可すると解決する場合が多いです。</p>
+  <p><code>Error: Could not register service workers: NotSupportedError ...</code> などが表示され、「シンプルブラウザーは開いたけど何も表示されない」という場合があります。これは必要な Cookie が許可されていない場合に起こります。以下の例を参考に、サード卓の Cookie を許可すると解決する場合が多いです。</p>
   <img src='https://i.gyazo.com/491d00e54d05da7d920816a2dbd53491.png' alt='Chrome のエラー例２' />
   <p>Cookie を許可しても解決しない場合は、シンプルブラウザーの右端にある「ブラウザーで開く」アイコンをクリックしてください。ブラウザの別タブで画面が表示され、こちらの画面でも現在の状態をご確認いただけます。</p>
   <img src='https://i.gyazo.com/289ea5dc51a0718161b59830c6e3d9ec.png' alt='Chrome のエラー例３' />

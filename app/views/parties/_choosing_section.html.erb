@@ -1,0 +1,29 @@
+<%boys = @party.boys%>
+<%girls = @party.girls%>
+
+<h2>ドキドキ投票タイムです!</h2>
+①自分の名前をクリック (他人の名前は勝手にクリックしないこと！)<br>
+②好きな人をこっそり投票<br>
+③全員の投票が終わったら，終了ボタンをクリック<br>
+<h2>男の子：<%= boys.count %>人<br></h2>
+<% boys.each do |boy| %>
+  <%if boy.has_choosed?%>
+    <%= boy.name%>(投票済み)<br>
+  <%else%>
+      <%= link_to boy.name , boy %><br>
+  <%end%>
+<%end%>
+<br>
+
+<h2>女の子：<%= girls.count %>人<br></h2>
+<% girls.each do |girl| %>
+  <%if girl.has_choosed?%>
+    <%= girl.name%>(投票済み)<br>
+  <%else%>
+    <%= link_to girl.name , girl %><br>
+  <%end%>
+<%end%>
+<br><br>
+【結果発表はこちら】
+<%= button_to '結果発表', party_path(@party), {method: :put, params: { status: 'resulting' },data: { turbo_confirm: "心の準備はいいですか?" },class: "btn btn-primary"}%>
+

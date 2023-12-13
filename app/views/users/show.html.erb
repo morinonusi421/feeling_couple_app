@@ -1,40 +1,31 @@
 <% provide(:title, @user.name) %>
-<% party = @user.party 
-   opposit_sex_users = party.users.select{|u| u.sex != @user.sex}
-%>
+<% party = @user.party %>
 
 <%if party.status != "choosing"%>
   ここは本来，<%=@user.name%>さんの好きな人を投票するためのページです。<br>
   今はこのユーザーの投票受付中ではないので、<br>
   上のボタンからトップページにお戻りください。<br>
 
-<%elsif @user.loving.nil?%>
+<%elsif !@user.has_choosed%>
   <h1>
     <%= @user.name %>さんの好きな人を選ぶページです！<br>
     間違えて来た人は<%=link_to "ここをクリック", party %>して戻りましょう<br>
   </h1>
-
-  あなたの好きな人を選んでね
-  <%= form_with(model: @user) do |f| %>
-    <%opposit_sex_users.each do |u|%>
-      <%= f.label :loving, u.name %>
-      <%= f.radio_button :loving_id, u.id%>
-      <br>
-    <%end%>
-    
-    <%=f.label :loving, "誰も好きじゃない"%>
-    <%=f.radio_button :loving_id,  -1%>
-    <br><br>
-    <%= f.submit "好きな人を決定！", class: "btn btn-primary" %>
+  <br>
+  <%if party.allow_like%>
+    <%= render "love_like_form"%>
+  <%else%>
+    <%= render "love_form"%>
   <%end%>
 
 <%else%>
   このユーザーはすでに投票済みです．
   誰に投票したかは・・内緒です！<br>
-  <%=link_to "パーティページへ戻る", party %>
+  <%=link_to "卓のページへ戻る", party %>
 <%end%>
 
 <%if Rails.env.development? %>
+  <br>
   ここから開発中のみ見えるデバッグ表示のはず<br>
   <br>
   本命<br>
@@ -43,6 +34,8 @@
   <%= @user.liking.inspect%><br>
   好かれてる人<br>
   <%= @user.likers.inspect%><br>
+  ユーザーパラメータ<br>
+  <%= @user.inspect%>
 <%end%>
 
 

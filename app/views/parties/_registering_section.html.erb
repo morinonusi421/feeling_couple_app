@@ -1,0 +1,38 @@
+<%boys = @party.boys%>
+<%girls = @party.girls%>
+
+<h2>フィーリングカップルのためのメンバーを<br>
+どんどん登録していきましょう!</h2>
+<h2>男の子：<%= boys.count%>人<br></h2>
+<%boys.each do |boy|%>
+  <div class="user-container">
+    <%= boy.name%>
+    <%= button_to "削除", boy, method: :delete,class: "btn btn-danger btn-sm"%>
+  </div>
+<%end%>
+<br>
+<h2>女の子：<%= girls.count%>人<br></h2>
+<%girls.each do |girl|%>
+  <div class="user-container">
+    <%= girl.name%>
+    <%= button_to "削除", girl, method: :delete,class: "btn btn-danger btn-sm"%>
+  </div>
+<%end%>
+<br><br><br>
+【メンバーの登録はこちら】
+<section class="user_form">
+  <%= render 'shared/user_form' %>
+</section>
+<br><br><br>
+【登録を締め切る場合はこちら］
+<%= button_to '締切', party_path(@party), {method: :put, params: { status: 'choosing' },class: "btn btn-primary"}%>
+
+<style>
+.user-container {
+  display: flex;
+  align-items: center; /* 垂直方向の中央揃え */
+  gap: 20px
+}
+</style>
+
+

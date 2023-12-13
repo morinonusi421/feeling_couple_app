@@ -15,7 +15,7 @@ class PartiesController < ApplicationController
   def create
     @party = Party.new(party_params)
     if @party.save
-      flash[:success] = "パーティの作成に成功しました"
+      flash[:success] = "卓の作成に成功しました"
       redirect_to @party
     else
       render 'new', status: :unprocessable_entity
@@ -27,10 +27,10 @@ class PartiesController < ApplicationController
     @party = Party.find_by(name: @keyword)
     if !@keyword.nil?
       if !@party.nil?
-        flash[:success] = "パーティが見つかりました"
+        flash[:success] = "卓が見つかりました"
         redirect_to @party
       else
-        flash[:failed] = "パーティが見つかりませんでした・・・"
+        flash[:failed] = "卓が見つかりませんでした・・・"
         render 'search', status: :unprocessable_entity
       end
     end
@@ -39,14 +39,14 @@ class PartiesController < ApplicationController
   def destroy
     @party = Party.find(params[:id])
     @party.destroy
-    flash[:success] = "パーティを削除しました"
+    flash[:success] = "卓を削除しました"
     redirect_to root_url, status: :see_other
   end
 
   def destroy_in_index
     @party = Party.find(params[:id])
     @party.destroy
-    flash[:success] = "パーティを削除しました"
+    flash[:success] = "卓を削除しました"
     redirect_to parties_path, status: :see_other
   end
 

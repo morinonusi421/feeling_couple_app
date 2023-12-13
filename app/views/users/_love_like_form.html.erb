@@ -1,0 +1,23 @@
+<% party = @user.party 
+   opposite_sex_users = party.users.select{|u| u.sex != @user.sex}
+%>
+
+まず、あなたの一番大好きな本命を一人だけ選んでください。
+<%= form_with(model: @user) do |f| %>
+  <%opposite_sex_users.each do |u|%>
+    <%= f.label :loving, u.name %>
+    <%= f.radio_button :loving_id, u.id%><br>
+  <%end%>
+  <%=f.label :loving, "本命はいない"%>
+  <%=f.radio_button :loving_id,  -1%><br>
+  <br>
+  次に、「まぁ付き合ってもいいかな」という人が他にいれば全て選んでください<br>
+  (本命で選んだ人はチェックしなくても大丈夫です)<br>
+  <% opposite_sex_users.each do |u| %>
+    <%= f.label :liking, u.name %>
+    <%= f.check_box :liking_ids, { multiple: true }, u.id, nil %><br>
+  <% end %>
+
+
+  <%= f.submit "好きな人を決定！", class: "btn btn-primary" %>
+<%end%> 

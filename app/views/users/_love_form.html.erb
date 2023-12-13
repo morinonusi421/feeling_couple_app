@@ -1,0 +1,17 @@
+<% party = @user.party 
+   opposite_sex_users = party.users.select{|u| u.sex != @user.sex}
+%>
+
+あなたの好きな人を選んでね。
+<%= form_with(model: @user) do |f| %>
+  <%opposite_sex_users.each do |u|%>
+    <%= f.label :loving, u.name %>
+    <%= f.radio_button :loving_id, u.id%>
+    <br>
+  <%end%>
+  
+  <%=f.label :loving, "誰も好きじゃない"%>
+  <%=f.radio_button :loving_id,  -1%>
+  <br><br>
+  <%= f.submit "好きな人を決定！", class: "btn btn-primary" %>
+<%end%> 

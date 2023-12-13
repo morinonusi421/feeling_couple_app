@@ -1,16 +1,16 @@
-<% provide(:title, 'パーティの作成') %>
-<h1>パーティの作成ページ</h1>
+<% provide(:title, '卓の作成') %>
+<h1>卓の作成ページ</h1>
 
-新しいパーティの名前を入力してください！<br>
+新しい卓の名前を入力してください！<br>
 (50文字を超えるとエラーになります)<br>
 (もうすでに使われている名前は使えません)<br><br>
 
     <%= form_with(model: @party) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
-      <%= f.label :name ,"パーティの名前"%>
+      <%= f.label :name ,"卓の名前"%>
       <%= f.text_field :name %><br>
       <%= f.label :allow_like, "likeを許可",class: "form-check-label" %>
       <%= f.check_box(:allow_like, {  }, "true", "false") %>
       <br>
-      <%= f.submit "パーティを作成する！", class: "btn btn-primary" %>
+      <%= f.submit "卓を作成する！", class: "btn btn-primary" %>
     <% end %>

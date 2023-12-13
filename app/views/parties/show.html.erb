@@ -1,125 +1,26 @@
-<%users = @party.users%>
-<%boys = @party.boys%>
-<%girls = @party.girls%>
-<%lovers = @party.lovers%>
-<%not_lovers = @party.not_lovers%>
-
 <% provide(:title, @party.name) %>
 <h1>
-  パーティ名
+  卓名
   <%= @party.name %><br>
 </h1>
 (このページのURLをシェアするとお友達と一緒に遊べます)<br><br>
 
 
-<% if @party.status == "recruiting"%>
-  <h2>フィーリングカップルのためのメンバーを<br>
-  どんどん登録していきましょう!</h2>
-  <h2>男の子：<%= boys.count%>人<br></h2>
-  <%boys.each do |boy|%>
-    <div class="user-container">
-      <%= boy.name%>
-      <%= button_to "削除", boy, method: :delete,class: "btn btn-danger btn-sm"%>
-    </div>
-  <%end%>
-  <br>
-  <h2>女の子：<%= girls.count%>人<br></h2>
-  <%girls.each do |girl|%>
-    <div class="user-container">
-      <%= girl.name%>
-      <%= button_to "削除", girl, method: :delete,class: "btn btn-danger btn-sm"%>
-    </div>
-  <%end%>
-  <br><br><br>
-  【メンバーの登録はこちら】
-  <section class="user_form">
-    <%= render 'shared/user_form' %>
-  </section>
-  <br><br><br>
-  【登録を締め切る場合はこちら］
-  <%= button_to '締切', party_path(@party), {method: :put, params: { status: 'choosing' },class: "btn btn-primary"}%>
-
-
-
-
-
+<% if @party.status == "registering"%>
+  <%= render "registering_section"%>
 
 <% elsif @party.status == "choosing"%>
-  <h2>ドキドキ投票タイムです!</h2>
-  ①自分の名前をクリック (他人の名前は勝手にクリックしないこと！)<br>
-  ②好きな人をこっそり投票<br>
-  ③全員の投票が終わったら，終了ボタンをクリック<br>
-  <h2>男の子：<%= boys.count %>人<br></h2>
-  <% boys.each do |boy| %>
-    <%if boy.has_choosed?%>
-      <%= boy.name%>(投票済み)<br>
-    <%else%>
-       <%= link_to boy.name , boy %><br>
-    <%end%>
-  <%end%>
-  <br>
-  
-  <h2>女の子：<%= girls.count %>人<br></h2>
-  <% girls.each do |girl| %>
-    <%if girl.has_choosed?%>
-      <%= girl.name%>(投票済み)<br>
-    <%else%>
-      <%= link_to girl.name , girl %><br>
-    <%end%>
-  <%end%>
-  <br><br>
-  【結果発表はこちら】
-  <%= button_to '結果発表', party_path(@party), {method: :put, params: { status: 'resulting' },data: { turbo_confirm: "心の準備はいいですか?" },class: "btn btn-primary"}%>
-
-
-
-
-
-
+  <%= render "choosing_section"%>
 
 <% elsif @party.status == "resulting"%>
-  <h3>
-  スクロールすると結果が見られます<br><br><br>
-  なんと今回・・・・<br>
-  <% (1..99).each do |i| %>
-    ↓<br>
-    <%= "(ドキドキ)<br>".html_safe if i%10==0%>
-  <%end%>
-  </h3>
+  <%= render "resulting_section"%>
 
-  <% if lovers.count >= 1%>
-    <bignews>
-    <%=lovers.count%>組のカップルが誕生しました！！！！！！<br><br>
-    <% lovers.each do |boy,girl|%>
-      <%=boy.name%> & <%=girl.name%>カップル<br>
-    <%end%>
-    おめでとうございま〜〜〜す！！！<br>
-    <iframe width="640" height="360" src="https://www.youtube.com/embed/lVIHyj9qVy0" title="ヤバイTシャツ屋さん - 「ハッピーウェディング前ソング」Music Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    </bignews>
-
-  <%else%>
-    <h1>
-    カップルは誕生しませんでした・・・・・<br>
-    </h1>
-    <br>
-    いつかまた素敵な出会いがあることを願っています<br>
-  <%end%>
-
-  <% if not_lovers.count >=1 %>
-    <br>
-    【残念ながら結ばれなかった方達】<br>
-    <%not_lovers.each do |user|%>
-      <%= user.name%><br>
-    <%end%>
-    次こそリベンジを狙いましょう！<br>
-  <%end%>
-  <%= link_to "トップページに戻る" ,  root_url%><br>
 <% end %>
 
 
 
 <br>
-【パーティを削除する場合はこちら】
+【卓を削除する場合はこちら】
 <%= button_to "削除", @party, method: :delete , data: { turbo_confirm: "本当に削除しますか？" },class: "btn btn-danger" %>
 
 <%if Rails.env.development? %>
@@ -130,10 +31,3 @@
 
 
 
-<style>
-.user-container {
-  display: flex;
-  align-items: center; /* 垂直方向の中央揃え */
-  gap: 20px
-}
-</style>

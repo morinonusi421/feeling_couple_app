@@ -19,18 +19,36 @@ class UsersController < ApplicationController
     end
   end
 
+  # def update
+  #   @user = User.find(params[:id])
+  #   #-1は誰も好きじゃないことを表すダミーデータ
+  #   if user_params[:loving_id] != "-1"
+  #     @user.loving_id = user_params[:loving_id]
+  #   end
+  #   @user.has_choosed = true
+  #   @user.save
+  #   flash[:success] = @user.name + "さんの選択が完了しました"
+  #   redirect_to @user.party
+  # end
+
   def update
     @user = User.find(params[:id])
-    #-1は誰も好きじゃないことを表すダミーデータ
-    if user_params[:loving_id] != "-1"
-      @user.update(user_params)
+    if user_params[:loving_id]!= "-1"
+      loving_id = user_params[:loving_id]
+      @user.loving = User.find(loving_id)
+    end
+    user_params[:liking_ids]&.each do |liking_id|
+      if liking_id != loving_id
+        @user.liking << User.find(liking_id)
+      end
     end
     @user.has_choosed = true
     @user.save
-    flash[:success] = @user.name + "さんの投票が完了しました"
+    flash[:success] = @user.name + "さんの選択が完了しました"
     redirect_to @user.party
-  end
 
+  end
+ 
   def destroy
     @user = User.find(params[:id])
     @party = @user.party
@@ -43,7 +61,7 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:name,:sex,:loving_id)
+      params.require(:user).permit(:name,:sex,:loving_id,liking_ids: [])
     end
 
 
