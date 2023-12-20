@@ -18,6 +18,7 @@ class PartiesController < ApplicationController
       flash[:success] = "卓の作成に成功しました"
       redirect_to @party
     else
+      flash[:failed] = "卓名がすでに使われているか、未入力です"
       render 'new', status: :unprocessable_entity
     end
   end

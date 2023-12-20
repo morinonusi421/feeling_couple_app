@@ -1,16 +1,33 @@
 <% provide(:title, '卓の作成') %>
 <h1>卓の作成ページ</h1>
 
-新しい卓の名前を入力してください！<br>
-(50文字を超えるとエラーになります)<br>
-(もうすでに使われている名前は使えません)<br><br>
-
+新しい卓の名前を入力してください。<br>
+(もうすでに使われている名前は使えません。)<br><br>
+  <div class == "party_form">
     <%= form_with(model: @party) do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
       <%= f.label :name ,"卓の名前"%>
       <%= f.text_field :name %><br>
-      <%= f.label :allow_like, "likeを許可",class: "form-check-label" %>
-      <%= f.check_box(:allow_like, {  }, "true", "false") %>
+      <br>
+      <%=f.label :allow_like, "通常モード"%>
+      <%=f.radio_button :allow_like,  false, {:checked => true} %><br>
+      <%=f.label :allow_like, "複数指名モード"%>
+      <%=f.radio_button :allow_like,  true%><br>
       <br>
       <%= f.submit "卓を作成する！", class: "btn btn-primary" %>
     <% end %>
+  </div>
+<br>
+
+<h3><b>●通常モード</b></h3>
+本命の相手を一人だけ選ぶことができます。<br>
+両想いの時だけカップル成立します。<br>
+
+<h3><b>●複数指名モード</b></h3>
+一人の本命に加えて、<b>「付き合ってもいいかな」</b>という相手を<b>複数名</b>選ぶことができます。<br>
+本命同士を優先的にマッチングした後、<br>
+お互いに「付き合ってもいい」と思っている男女のマッチングを行います。<br>
+（このとき、成立カップルが最も多くなるようにマッチングされます。）<br>
+<br>
+「自分を好きになってくれる人がタイプです！」という考えの方は,<br>
+ このモードで「付き合ってもいい」相手をたくさん指名しましょう。<br>
+<br>

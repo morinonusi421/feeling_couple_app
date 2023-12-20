@@ -1,5 +1,5 @@
-<%lovers = @party.lovers%>
-<%not_lovers = @party.not_lovers%>
+<%couples = @party.couples%>
+<%not_couples = @party.not_couples%>
 
 <h3>
 スクロールすると結果が見られます<br><br><br>
@@ -10,10 +10,10 @@
 <%end%>
 </h3>
 
-<% if lovers.count >= 1%>
+<% if couples.count >= 1%>
   <bignews>
-  <%=lovers.count%>組のカップルが誕生しました！！！！！！<br><br>
-  <% lovers.each do |boy,girl|%>
+  <%=couples.count%>組のカップルが誕生しました！！！！！！<br><br>
+  <% couples.each do |boy,girl|%>
     <%=boy.name%> & <%=girl.name%>カップル<br>
   <%end%>
   おめでとうございま〜〜〜す！！！<br>
@@ -29,10 +29,10 @@
   いつかまた素敵な出会いがあることを願っています<br>
 <%end%>
 
-<% if not_lovers.count >=1 %>
+<% if not_couples.count >=1 %>
   <br>
   【残念ながら結ばれなかった方達】<br>
-  <%not_lovers.each do |user|%>
+  <%not_couples.each do |user|%>
     <%= user.name%><br>
   <%end%>
   次こそリベンジを狙いましょう！<br>

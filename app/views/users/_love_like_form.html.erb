@@ -11,7 +11,7 @@
   <%=f.label :loving, "本命はいない"%>
   <%=f.radio_button :loving_id,  -1%><br>
   <br>
-  次に、「まぁ付き合ってもいいかな」という人が他にいれば全て選んでください<br>
+  「付き合ってもいいかな」という人がもし他にいれば、全て選んでください<br>
   (本命で選んだ人はチェックしなくても大丈夫です)<br>
   <% opposite_sex_users.each do |u| %>
     <%= f.label :liking, u.name %>
