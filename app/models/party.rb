@@ -44,9 +44,10 @@ class Party < ApplicationRecord
         visited.add(u)
         if matched[u] == -1 || dfs(matched[u], edges, matched, visited)
           matched[u] = v
-          return
+          return true
         end
       end
+      return false
     end
 
     #余り男全員を始点にdfsをする
