@@ -1,7 +1,7 @@
 class PartiesController < ApplicationController
 
   def show
-    @party = Party.find(params[:id])
+    @party = Party.find_by(name: params[:name])
   end
 
   def new
@@ -18,7 +18,7 @@ class PartiesController < ApplicationController
       flash[:success] = "卓の作成に成功しました"
       redirect_to @party
     else
-      flash[:failed] = "卓名がすでに使われているか、未入力です"
+      flash[:failed] = "使用済みの卓名、もしくは記号が含まれています"
       render 'new', status: :unprocessable_entity
     end
   end
@@ -38,21 +38,21 @@ class PartiesController < ApplicationController
   end
 
   def destroy
-    @party = Party.find(params[:id])
+    @party = Party.find_by(name: params[:name])
     @party.destroy
     flash[:success] = "卓を削除しました"
     redirect_to root_url, status: :see_other
   end
 
   def destroy_in_index
-    @party = Party.find(params[:id])
+    @party = Party.find_by(name: params[:name])
     @party.destroy
     flash[:success] = "卓を削除しました"
     redirect_to parties_path, status: :see_other
   end
 
   def update
-    @party = Party.find(params[:id])
+    @party = Party.find_by(name: params[:name])
     @users = @party.users
 
     if params[:status]=="choosing"

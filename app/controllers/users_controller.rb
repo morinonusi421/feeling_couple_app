@@ -5,9 +5,9 @@ class UsersController < ApplicationController
   end
 
   def create
-    #遷移元url末尾を取得　paries/2 だったらparty_id = 2
-    @party_id = request.referer.split("/")[-1].to_i
-    @party = Party.find(@party_id)
+    #遷移元url末尾を取得　/parties/gokon だったらparty_name = gokon
+    @party_name = request.referer.split("/")[-1]
+    @party = Party.find_by(name: @party_name)
     @user = @party.users.build(user_params)
     if @user.save
       flash[:success] = "メンバーの登録に成功しました"

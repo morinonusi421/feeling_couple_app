@@ -1,8 +1,22 @@
 class Party < ApplicationRecord
   enum status: { registering: 0, choosing: 10 , resulting: 20}
   has_many :users,dependent: :destroy
-  validates :name,  presence: true, length: { maximum: 50 }, uniqueness: true
+  validates :name,  presence: true, uniqueness: true
+  validate :validate_name_format
   validates :allow_like, inclusion: { in: [true, false] }
+
+
+  def to_param
+    name
+  end
+
+  def validate_name_format
+    if name.present?
+      unless name.match?(/\A[\p{Hiragana}\p{Katakana}\p{Han}\dA-Za-z]+\z/)
+        errors.add(:name, "はひらがな、カタカナ、漢字、数字、半角英語、全角英語のみ許可されます")
+      end
+    end
+  end
 
   def boys
     self.users.select{|u|u.sex=="boy"}
