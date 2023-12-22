@@ -6,7 +6,8 @@ class UsersController < ApplicationController
 
   def create
     #遷移元url末尾を取得　/parties/gokon だったらparty_name = gokon
-    @party_name = request.referer.split("/")[-1]
+    #URLパラメータは日本語だと%EC...とエンコードされてるので、デコードする
+    @party_name = URI.decode_www_form_component(request.referer.split("/")[-1])
     @party = Party.find_by(name: @party_name)
     @user = @party.users.build(user_params)
     if @user.save
