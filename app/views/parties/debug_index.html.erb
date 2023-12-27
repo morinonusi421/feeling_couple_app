@@ -1,0 +1,16 @@
+もしこのページ自力で見つけた人いたら教えてください
+
+<%@parties.each do |party|%>
+  <div class="party-container">
+    <%= link_to party.name , party %><br>
+    <%= button_to "削除",  destroy_in_index_party_path(party), method: :delete,data: { turbo_confirm: "削除OK?" }%>
+  </div>
+<%end%>
+
+<style>
+.party-container {
+  display: flex;
+  align-items: center; /* 垂直方向の中央揃え */
+  gap: 20px
+}
+</style>

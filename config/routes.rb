@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   get "/newparty", to: "parties#new"
   get "/searchparty", to: "parties#search"
   get "/reload", to: 'application#reload'
+  get "/debug_parties", to:"parties#debug_index"
   resources :likes, only: [:create, :destroy]
 end

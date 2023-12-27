@@ -8,7 +8,7 @@ class PartiesController < ApplicationController
     @party = Party.new
   end
 
-  def index
+  def debug_index
     @parties = Party.all
   end
 
