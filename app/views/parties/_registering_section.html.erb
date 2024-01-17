@@ -19,10 +19,16 @@
   </div>
 <%end%>
 <br><br><br>
-【メンバーの登録はこちら】
+【メンバーの登録はこちら】<br>
+<br>
+(1人ずつ登録する場合はこちら)<br>
 <section class="user_form">
   <%= render 'shared/user_form' %>
 </section>
+<br>
+(一括で登録する場合はこちら)<br>
+(1行ごとに、名前と性別を空白区切りで入力してください)
+ <%= render 'shared/user_bundle_form' %>
 <br><br><br>
 【登録を締め切る場合はこちら］
 <%= button_to '締切', party_path(@party), {method: :put, params: { status: 'choosing' },class: "btn btn-primary"}%>

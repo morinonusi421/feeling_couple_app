@@ -11,7 +11,7 @@
 
 
 <% if @party.status == "registering"%>
-  <%= render "registering_section"%>
+  <%= render "/parties/registering_section"%>
 
 <% elsif @party.status == "choosing"%>
   <%= render "choosing_section"%>

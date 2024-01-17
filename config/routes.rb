@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root to:'static_pages#home'
-  resources :users
+  resources :users do
+    post 'bundle_create', on: :collection
+  end
   resources :parties, param: :name do
     member do
       delete 'destroy_in_index', to: 'parties#destroy_in_index'

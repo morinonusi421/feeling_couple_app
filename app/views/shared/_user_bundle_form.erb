@@ -1,0 +1,7 @@
+<%= form_with(model: User.new, url: bundle_create_users_path, local: true, method: :post) do |f| %>
+  <div class="field">
+    <%= f.text_area :users_data, rows: 3 ,placeholder: "まさき 男\nよしみ 女"%>
+  </div>
+
+  <%= f.submit "一括登録", class: "btn btn-primary" %>
+<% end %>

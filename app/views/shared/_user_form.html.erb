@@ -1,10 +1,10 @@
 <%@newuser = @party.users.build%>
 <%= form_with(model: @newuser) do |f| %>
   <div class="field">
-    <%= f.text_area :name, placeholder: "新しいメンバーの名前" %>
+    <%= f.text_area :name, rows: 1, placeholder: "まさき" %>
   </div>
   <%= f.label :boy, '男の子' %>
-  <%= f.radio_button :sex, :boy %>
+  <%= f.radio_button :sex, :boy,{:checked => true}  %>
   <br>
   <%= f.label :girl, '女の子' %>
   <%= f.radio_button :sex, :girl %>
