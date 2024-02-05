@@ -8,7 +8,8 @@
 モード:通常モード
 <%end%>
 (このページのURLをシェアするとお友達と一緒に遊べます)<br><br>
-
+<div class="line-it-button" style="display: none;" data-type="share-a" data-lang="ja"></div>
+<script src="//scdn.line-apps.com/n/line_it/thirdparty/loader.min.js" async="async" defer="defer"></script>
 
 <% if @party.status == "registering"%>
   <%= render "/parties/registering_section"%>
