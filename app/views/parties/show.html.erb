@@ -5,11 +5,13 @@
 <%if @party.allow_like%>
 モード:複数指名モード<br>
 <%else%>
-モード:通常モード
+モード:通常モード<br>
 <%end%>
-(このページのURLをシェアするとお友達と一緒に遊べます)<br><br>
+<br>
+
 <div class="line-it-button" style="display: none;" data-type="share-a" data-lang="ja"></div>
 <script src="//scdn.line-apps.com/n/line_it/thirdparty/loader.min.js" async="async" defer="defer"></script>
+(このページのURLをシェアするとお友達と一緒に遊べます)<br><br>
 
 <% if @party.status == "registering"%>
   <%= render "/parties/registering_section"%>

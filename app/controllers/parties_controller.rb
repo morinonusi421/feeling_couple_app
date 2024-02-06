@@ -78,7 +78,6 @@ class PartiesController < ApplicationController
       
     end
     
-
   end
 
 

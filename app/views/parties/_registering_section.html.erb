@@ -2,7 +2,10 @@
 <%girls = @party.girls%>
 
 <h2>フィーリングカップルのためのメンバーを<br>
-どんどん登録していきましょう!</h2>
+どんどん登録していきましょう!<br></h2>
+(同じ名前の人は登録できません)<br>
+<br>
+
 <h2>男の子：<%= boys.count%>人<br></h2>
 <%boys.each do |boy|%>
   <div class="user-container">
@@ -21,12 +24,12 @@
 <br><br><br>
 【メンバーの登録はこちら】<br>
 <br>
-(1人ずつ登録する場合はこちら)<br>
+(1人ずつ登録する場合)<br>
 <section class="user_form">
   <%= render 'shared/user_form' %>
 </section>
 <br>
-(一括で登録する場合はこちら)<br>
+(一括で登録する場合)<br>
 (1行ごとに、名前と性別を空白区切りで入力してください)
  <%= render 'shared/user_bundle_form' %>
 <br><br><br>
