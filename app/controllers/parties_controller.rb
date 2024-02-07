@@ -48,7 +48,7 @@ class PartiesController < ApplicationController
     @party = Party.find_by(name: params[:name])
     @party.destroy
     flash[:success] = "卓を削除しました"
-    redirect_to parties_path, status: :see_other
+    redirect_to debug_parties_path, status: :see_other
   end
 
   def update
