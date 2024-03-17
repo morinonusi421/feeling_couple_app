@@ -12,7 +12,10 @@
 
 <% if couples.count >= 1%>
   <bignews>
-  <%=couples.count%>組のカップルが誕生しました！！！！！！<br><br>
+  <div class="block" id="target">
+    <%=couples.count%>組のカップルが誕生しました！！！！！！<br><br>
+  </div>
+
   <% couples.each do |boy,girl|%>
     <%=boy.name%> & <%=girl.name%>カップル<br>
   <%end%>
@@ -21,13 +24,72 @@
   <br>
   </bignews>
 
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.2/dist/confetti.browser.min.js"></script>
+  <script>
+    let once = false;
+    window.addEventListener('scroll', function () {
+      // ターゲットの画面トップからの距離
+      let target_position = document.querySelector('#target').getBoundingClientRect().top;
+
+      // 画面トップからの距離から画面の高さより小さければ実行する
+      if (target_position <= window.innerHeight && once !== true) {
+        once = true;
+        // ここにカップルが誕生したときに実行するコードを記述します
+        var duration = 10000000000000000000000;
+        var animationEnd = Date.now() + duration;
+        var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+        function randomInRange(min, max) {
+          return Math.random() * (max - min) + min;
+        }
+
+        var interval = setInterval(function() {
+          var timeLeft = animationEnd - Date.now();
+
+          if (timeLeft <= 0) {
+            return clearInterval(interval);
+          }
+
+          var particleCount = 50 * (timeLeft / duration);
+          // since particles fall down, start a bit higher than random
+          confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
+          confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
+        }, 250);
+      }
+    });
+  </script>
+
 <%else%>
   <h1>
-  カップルは誕生しませんでした・・・・・<br>
+    <div class="block" id="target">
+      カップルは誕生しませんでした・・・・・<br>
+    </div>
   </h1>
-  <iframe width="640" height="360" src="https://www.youtube.com/embed/vcGnSjTsjRA?si=Jdli44TWc_C-DbmL" title="僕は君の事が好きだけど君は僕を別に好きじゃないみたい" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <iframe width="640" height="360" src="https://www.youtube.com/embed/mQvTXaDYnPo" title="僕は君の事が好きだけど君は僕を別に好きじゃないみたい" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
   <br>
   いつかまた素敵な出会いがあることを願っています<br>
+  <script>
+    let snowScriptLoaded = false;
+    window.addEventListener('scroll', function () {
+      // ターゲットの画面トップからの距離
+      let target_position = document.querySelector('#target').getBoundingClientRect().top;
+      
+      // 画面トップからの距離から画面の高さより小さければ実行する
+      if (target_position <= window.innerHeight && !snowScriptLoaded) {
+        document.body.style.backgroundImage = "url('<%= asset_url('night.jpg') %>')";
+        document.body.style.color = "white";
+        snowScriptLoaded = true;
+        // スクリプトの読み込み
+        let script = document.createElement('script');
+        script.src = "https://app.embed.im/snow.js";
+        script.defer = true;
+        document.body.appendChild(script);
+      }
+    });
+  </script>
+
+
+
 <%end%>
 
 <% if not_couples.count >=1 %>
@@ -38,4 +100,9 @@
   <%end%>
   次こそリベンジを狙いましょう！<br>
 <%end%>
+
 <%= link_to "トップページに戻る" ,  root_url%><br>
+
+
+
+

@@ -36,7 +36,7 @@ class UsersController < ApplicationController
         name, sex = user_data.split("　")
       else
         flash[:failed] = "名前と性別を、空白区切りで入力してください"
-        redirect_to @party, status: :unprocessable_entity
+        redirect_to @party, :status => 401
         return
       end
 
