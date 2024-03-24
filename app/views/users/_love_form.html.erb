@@ -11,7 +11,7 @@
   <%end%>
   
   <%=f.label :loving, "誰も好きじゃない"%>
-  <%=f.radio_button :loving_id,  -1%>
+  <%=f.radio_button :loving_id,  -1,{:checked => true}%>
   <br><br>
   <%= f.submit "好きな人を決定！", class: "btn btn-primary" %>
 <%end%> 
